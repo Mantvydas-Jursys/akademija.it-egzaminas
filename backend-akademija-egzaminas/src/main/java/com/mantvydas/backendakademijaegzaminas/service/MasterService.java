@@ -1,9 +1,11 @@
 package com.mantvydas.backendakademijaegzaminas.service;
 
-import com.mantvydas.backendakademijaegzaminas.model.Master;
+import com.mantvydas.backendakademijaegzaminas.model.Client;
 import com.mantvydas.backendakademijaegzaminas.repo.MasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class MasterService {
@@ -16,7 +18,15 @@ public class MasterService {
     }
 
     // Use the repository methods to perform database operations
-    public Master saveMaster(Master master) {
-        return masterRepository.save(master);
+    public Client saveMaster(Client client) {
+        return masterRepository.save(client);
+    }
+
+    public Client createMaster(Client client) {
+        return masterRepository.save(client);
+    }
+
+    public List<Client> getAllMasters() {
+        return masterRepository.findAll();
     }
 }

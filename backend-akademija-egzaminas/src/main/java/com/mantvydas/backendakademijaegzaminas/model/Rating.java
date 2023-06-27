@@ -1,10 +1,6 @@
 package com.mantvydas.backendakademijaegzaminas.model;
 
-
 import jakarta.persistence.*;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 public class Rating {
@@ -13,29 +9,28 @@ public class Rating {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int rating;
-
     @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
-    @ManyToMany
-    @JoinTable(
-            name = "master_service_rating",
-            joinColumns = @JoinColumn(name = "rating_id"),
-            inverseJoinColumns = @JoinColumn(name = "master_id")
-    )
-    private Set<Master> masters = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "master_id")
+    private Master master;
 
-    public Rating () {
+    private int rating;
 
+    // Constructors, getters, and setters
+
+    public Rating() {
     }
 
-    public Rating(Long id, int rating, Client client, Set<Master> masters) {
-        this.id = id;
-        this.rating = rating;
+    public Rating(Client client, Master master, int rating) {
         this.client = client;
-        this.masters = masters;
+        this.master = master;
+        this.rating = rating;
     }
+
+    // Getters and Setters
 
     public Long getId() {
         return id;
@@ -43,14 +38,6 @@ public class Rating {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getRating() {
-        return rating;
-    }
-
-    public void setRating(int rating) {
-        this.rating = rating;
     }
 
     public Client getClient() {
@@ -61,21 +48,19 @@ public class Rating {
         this.client = client;
     }
 
-    public Set<Master> getMasters() {
-        return masters;
+    public Master getMaster() {
+        return master;
     }
 
-    public void setMasters(Set<Master> masters) {
-        this.masters = masters;
+    public void setMaster(Master master) {
+        this.master = master;
     }
 
-    @Override
-    public String toString() {
-        return "Rating{" +
-                "id=" + id +
-                ", rating=" + rating +
-                ", client=" + client +
-                ", masters=" + masters +
-                '}';
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 }
