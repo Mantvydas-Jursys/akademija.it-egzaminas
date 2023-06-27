@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RatingRepository extends JpaRepository<Rating, Long> {
 
-    @Query("SELECT AVG(r.ratingValue) FROM Rating r WHERE r.masterId = :masterId")
+    @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.master = :masterId")
     Double getAverageRatingByMasterId(Long masterId);
 
 }
