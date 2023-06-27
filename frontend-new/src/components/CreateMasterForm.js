@@ -13,7 +13,7 @@ const CreateMasterForm = () => {
     };
 
     try {
-      const response = await axios.post('/masters', masterData);
+      const response = await axios.post('http://localhost:8080/api/v1/client/create-master', masterData);
       console.log(response.data); // handle the response as needed
     } catch (error) {
       console.error(error);
